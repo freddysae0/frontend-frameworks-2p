@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: false
+  jobs:
+    - run: npm run lint:hook 
+      glob: '**/*.{js,ts,jsx,tsx}'
+
+    - run: npm run prettier:hook 
+      glob: '**/*.{js,ts,jsx,tsx,json,css,scss,md,html}'
+      stage_fixed: true
+
+
+
+
