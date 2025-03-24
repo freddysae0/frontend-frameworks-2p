@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "cd react && npm run test && cd ../vue && npm run test:unit"
+  },
+  "devDependencies": {
+    "lefthook": "^1.11.4"
+  }
+}

@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { useState } from 'react';
 import shrekAdjetives from './shrek_adjetives.json';
 import Image from 'next/image';
@@ -15,7 +16,10 @@ export default function Home() {
     <div className='flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
       <h1 className='text-xl '>
         {' '}
-        I&apos;m <span className='text-emerald-500'>{currentAdjetive}</span>
+        I&apos;m{' '}
+        <span data-testid='adjective-span' className='text-emerald-500'>
+          {currentAdjetive}
+        </span>
       </h1>
       <button
         onClick={onCLick}
