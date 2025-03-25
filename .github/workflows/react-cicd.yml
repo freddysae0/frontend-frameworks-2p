@@ -30,7 +30,7 @@ jobs:
         run: cd react && npm run lint ./src
 
       - name: 🧪 Run tests (Vitest)
-        run: cd react && npm run test:unit --run
+        run: cd react && npm run test
 
       - name: 🔨 Build project
         run: cd react && npm run build
