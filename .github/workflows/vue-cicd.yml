@@ -1,0 +1,70 @@
+name: CI/CD VueJS APP Pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  ci:
+    name: 🔍 Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: cd vue && npm install
+
+      - name: 🎨 Check format (Prettier)
+        run: cd vue && npm run format:check .
+
+      - name: 🔍 Lint (ESLint)
+        run: cd vue && npm run lint
+
+      - name: 🧪 Run unit tests (Vitest)
+        run: cd vue && npm run test:unit --run
+
+      - name: 🔨 Build project
+        run: cd vue && npm run build
+
+  deploy:
+    name: 🚀 Deploy to Netlify
+    needs: ci # Only if the ci job is successful
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Enter into the vue folder
+        run: cd vue
+
+      - name: 📦 Install dependencies
+        run: cd vue && npm install
+
+      - name: 🔨 Build project
+        run: cd vue && npm run build
+
+      - name: 🚀 Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: 🚀 Deploy to Netlify
+        run: cd vue && netlify deploy --dir=dist --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_VUE }}

@@ -1,0 +1,66 @@
+name: CI/CD NextJS APP Pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  ci:
+    name: 🔍 Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: cd react && npm install
+
+      - name: 🎨 Check format (Prettier)
+        run: cd react && npm run prettier:hook .
+
+      - name: 🔍 Lint (ESLint)
+        run: cd react && npm run lint ./src
+
+      - name: 🧪 Run unit tests (Vitest)
+        run: cd react && npm run test
+
+      - name: 🔨 Build project
+        run: cd react && npm run build
+
+  deploy:
+    name: 🚀 Deploy to Netlify
+    needs: ci # Only if the ci job is successful
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Enter into the react folder
+        run: cd react
+
+      - name: 📦 Install dependencies
+        run: cd react && npm install
+
+      - name: 🚀 Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: 🚀 Deploy to Netlify
+        run: cd react && netlify deploy --build --dir=.next --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_REACT }}
