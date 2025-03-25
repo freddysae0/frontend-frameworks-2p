@@ -2,9 +2,9 @@ name: CI/CD NextJS APP Pipeline
 
 on:
   push:
-    branches:
-      - deploy
-
+    branches: [master]
+  pull_request:
+    branches: [master]
 jobs:
   ci:
     name: 🔍 Lint, Test & Build
