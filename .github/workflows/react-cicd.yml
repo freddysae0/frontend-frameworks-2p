@@ -20,23 +20,20 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Enter into the react folder
-        run: cd react
-
       - name: 📦 Install dependencies
-        run: npm install
+        run: cd react && npm install
 
       - name: 🎨 Check format (Prettier)
-        run: npm run prettier:hook .
+        run: cd react && npm run prettier:hook .
 
       - name: 🔍 Lint (ESLint)
-        run: npm run lint ./src
+        run: cd react && npm run lint ./src
 
       - name: 🧪 Run tests (Vitest)
-        run: npm run test:unit --run
+        run: cd react && npm run test:unit --run
 
       - name: 🔨 Build project
-        run: npm run build
+        run: cd react && npm run build
 
   deploy:
     name: 🚀 Deploy to Netlify
@@ -57,16 +54,16 @@ jobs:
         run: cd react
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: cd react && npm install
 
       - name: 🔨 Build project
-        run: npm run build
+        run: cd react && npm run build
 
       - name: 🚀 Install Netlify CLI
         run: npm install -g netlify-cli
 
       - name: 🚀 Deploy to Netlify
-        run: netlify deploy --dir=dist --prod
+        run: cd react && netlify deploy --dir=dist --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_REACT }}

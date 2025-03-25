@@ -20,23 +20,20 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Enter into the vue folder
-        run: cd vue
-
       - name: 📦 Install dependencies
-        run: npm install
+        run: cd vue && npm install
 
       - name: 🎨 Check format (Prettier)
-        run: npm run format:check .
+        run: cd vue && npm run format:check .
 
       - name: 🔍 Lint (ESLint)
-        run: npm run lint
+        run: cd vue && npm run lint
 
       - name: 🧪 Run tests (Vitest)
-        run: npm run test:unit --run
+        run: cd vue && npm run test:unit --run
 
       - name: 🔨 Build project
-        run: npm run build
+        run: cd vue && npm run build
 
   deploy:
     name: 🚀 Deploy to Netlify
@@ -57,16 +54,16 @@ jobs:
         run: cd vue
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: cd vue && npm install
 
       - name: 🔨 Build project
-        run: npm run build
+        run: cd vue && npm run build
 
       - name: 🚀 Install Netlify CLI
         run: npm install -g netlify-cli
 
       - name: 🚀 Deploy to Netlify
-        run: netlify deploy --dir=dist --prod
+        run: cd vue && netlify deploy --dir=dist --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_VUE }}
