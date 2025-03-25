@@ -29,7 +29,7 @@ jobs:
       - name: 🔍 Lint (ESLint)
         run: cd react && npm run lint ./src
 
-      - name: 🧪 Run tests (Vitest)
+      - name: 🧪 Run unit tests (Vitest)
         run: cd react && npm run test
 
       - name: 🔨 Build project
