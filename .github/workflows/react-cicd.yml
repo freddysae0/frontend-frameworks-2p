@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD NextJS APP Pipeline
 
 on:
   push:
@@ -56,14 +56,11 @@ jobs:
       - name: 📦 Install dependencies
         run: cd react && npm install
 
-      - name: 🔨 Build project
-        run: cd react && npm run build
-
       - name: 🚀 Install Netlify CLI
         run: npm install -g netlify-cli
 
       - name: 🚀 Deploy to Netlify
-        run: cd react && netlify deploy --dir=.next --prod
+        run: cd react && netlify deploy --build --dir=.next --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_REACT }}
