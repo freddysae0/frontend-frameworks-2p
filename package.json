@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "test": "cd react && npm run test && cd ../vue && npm run test:unit"
+    "test": "cd react && npm run test && cd ../vue && npm run test:unit",
+    "init": "npm i && cd react && npm i && cd ../vue && npm i",
+    "build-react": "cd react && npm run build",
+    "build-vue": "cd vue && npm run build",
+    "start-react": "cd react && npm start"
   },
   "devDependencies": {
     "lefthook": "^1.11.4"
