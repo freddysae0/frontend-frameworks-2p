@@ -2,16 +2,15 @@ pre-commit:
   parallel: false
   commands:
     lint-vue:
-      run: git diff --cached --name-only --diff-filter=d -- 'vue/**/*.{js,ts,jsx,tsx,vue}' | xargs -r npx eslint --fix
+      run:  cd vue && git diff --cached --name-only --diff-filter=d | grep -E 'vue/.*\.(js|ts|jsx|tsx)$' | sed 's/^vue\///' | xargs -r npx eslint --fix
 
     lint-react:
-      run: git diff --cached --name-only --diff-filter=d -- 'react/**/*.{js,ts,jsx,tsx}' | xargs -r npx eslint --fix
+      run: cd react && git diff --cached --name-only --diff-filter=d | grep -E 'react/.*\.(js|ts|jsx|tsx)$' | sed 's/^react\///' | xargs -r npx eslint --fix
 
     prettier-vue:
-      run: git diff --cached --name-only --diff-filter=d -- 'vue/**/*.{js,ts,jsx,tsx,json,css,scss,md,html,vue}' | xargs -r npx prettier --write
+      run:  cd vue && git diff --cached --name-only --diff-filter=d | grep -E 'vue/.*\.(js|ts|jsx|tsx)$' | sed 's/^vue\///' | xargs -r npx prettier --write
       stage_fixed: true
 
     prettier-react:
-      run: git diff --cached --name-only --diff-filter=d -- 'react/**/*.{js,ts,jsx,tsx,json,css,scss,md,html}' | xargs -r npx prettier --write
+      run: cd react && git diff --cached --name-only --diff-filter=d | grep -E 'react/.*\.(js|ts|jsx|tsx)$' | sed 's/^react\///' | xargs -r npx prettier --write
       stage_fixed: true
-
