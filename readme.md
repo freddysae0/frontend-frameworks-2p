@@ -41,11 +41,8 @@ npm run test
 
 This will run all the tests for both projects.
 
----
 
-### Key Improvements:
 
-1. **Clarified project names** (Next.js and Vue).
-2. **Formatting consistency** for commands (added more explanation).
-3. **Improved the structure** with headings for better readability.
-4. Made it clear that **Lefthook** manages multiple tasks.
+# Deployment links
+https://shrekreact.netlify.app/
+https://shrekvue.netlify.app/

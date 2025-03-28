@@ -30,12 +30,7 @@ export default function Home() {
         Click
       </button>
 
-      <Image
-        src='https://static.wikia.nocookie.net/shrek/images/3/3f/Portada_img.jpg/revision/latest?cb=20100719002911&path-prefix=es'
-        alt='Shrek'
-        width={500}
-        height={500}
-      ></Image>
+      <Image src='/shrek.webp' alt='Shrek' width={500} height={500}></Image>
     </div>
   );
 }
