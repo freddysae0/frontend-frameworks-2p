@@ -1,14 +1,17 @@
 {
   "scripts": {
-    "test": "cd react && npm run test && cd ../vue && npm run test:unit --run && cd .. && npx playwright test",
+    "test": "cd react && npm run test && cd ../vue && npm run test:unit --run && cd .. && npx playwright test --project=chromium",
     "init": "npm i && cd react && npm i && cd ../vue && npm i",
+    "dev": "concurrently \"cd react/ && PORT=4950 npm run dev\" \"cd vue && npm run dev\"",
     "build-react": "cd react && npm run build",
     "build-vue": "cd vue && npm run build",
     "start-react": "cd react && npm start"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.1",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.13",
+    "concurrently": "^9.1.2",
     "lefthook": "^1.11.4"
   }
 }

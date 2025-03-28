@@ -16,9 +16,11 @@ const onClick = () => {
     class="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
   >
     <h1 class="text-xl">
-      I&apos;m <span class="text-emerald-500">{{ currentAdjective }}</span>
+      I&apos;m
+      <span class="text-emerald-500" data-testid="adjective-span">{{ currentAdjective }}</span>
     </h1>
     <button
+      data-testid="shrek-button"
       @click="onClick"
       class="p-2 px-4 bg-slate-200 rounded-xl hover:bg-slate-100 transition-all cursor-pointer"
     >

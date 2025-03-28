@@ -23,6 +23,7 @@ export default function Home() {
       </h1>
       <button
         onClick={onCLick}
+        data-testid='shrek-button'
         className='p-2 px-4 bg-slate-200 rounded-xl hover:bg-slate-100 transition-all cursor-pointer  '
       >
         {' '}
